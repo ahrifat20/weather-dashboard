@@ -14,7 +14,7 @@ export default function Header(){
             <div className="flex items-center gap-4 relative">
               <Search />
               <Favourite onShow={() => setShowFavModal((prev) => !prev)} />
-              {showFavModal && <FavouriteListModal />}
+              {showFavModal && <FavouriteListModal onShow={() => setShowFavModal((prev) => !prev)} />}
             </div>
           </nav>
         </header>

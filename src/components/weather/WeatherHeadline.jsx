@@ -1,45 +1,16 @@
 import pin from "../../assets/pin.svg";
 import { useWeatherContext } from "../../hooks";
 import { getFormatedDate } from "../../utils/date-util";
-
-import cloudIcon from "../../assets/cloud.svg";
-import hazeIcon from "../../assets/haze.svg";
-import snowIcon from "../../assets/icons/snow.svg";
-import sunnyIcon from "../../assets/icons/sunny.svg";
-import rainIcon from "../../assets/rainy.svg";
-import thunderIcon from "../../assets/thunder.svg";
+import { getImageUrl } from "../../utils/getImageUrl-util";
 
 export default function WeatherHeadline(){
   const {weatherData} = useWeatherContext();
-  const {climate, location, temperature, time} = weatherData;
-
-  const getWeatherIcon = (climate) => {
-    switch(climate) {
-      case "Rain":
-        return rainIcon;
-      case "Clouds":
-        return cloudIcon;
-      case "Clear":
-        return sunnyIcon;
-      case "Snow":
-        return snowIcon;
-      case "Thunder":
-        return thunderIcon;
-      case "Fog":
-        return hazeIcon;
-      case "Haze":
-        return hazeIcon;
-      case "Mist":
-        return hazeIcon;
-      default:
-        return sunnyIcon;
-    }
-  }
+  const {climateIcon, location, temperature, time } = weatherData;
     return (
       <>
         <div>
           <div className="max-md:flex items-center justify-between md:-mt-10">
-            <img src={getWeatherIcon(climate)} alt="cloud" />
+            <img src={getImageUrl(`${climateIcon}.png`)} alt="cloud" height="70" width="70"/>
             <div className="max-md:flex items-center max-md:space-x-4">
               <h1 className="text-[60px] lg:text-[80px] xl:text-[100px] leading-none md:mb-4">
                 {Math.round(temperature)}°

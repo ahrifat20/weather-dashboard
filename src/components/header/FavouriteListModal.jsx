@@ -1,7 +1,13 @@
-import { useFavouritesContext } from "../../hooks";
+import { useFavouritesContext, useLocationContext } from "../../hooks";
 
-export default function FavouriteListModal(){
+export default function FavouriteListModal({onShow}){
   const {favorites} = useFavouritesContext();
+  const {setSearchLocation} = useLocationContext();
+
+  const handleClick = (location) => {
+    setSearchLocation(location);
+    onShow();
+  };
 
     return (
       <>
@@ -11,7 +17,11 @@ export default function FavouriteListModal(){
             {
               favorites.length > 0 ? (
                 favorites.map((fav) => (
-                  <li key={fav.location} className="hover:bg-gray-200">{fav.location}</li>
+                  <li key={fav.location} className="hover:bg-gray-200">
+                    <a onClick={() => handleClick(fav.location)}>
+                    {fav.location}
+                    </a>
+                  </li>
                 ))
               ) : (
                 <p>Nothing is added to favorites!</p>
